@@ -1,0 +1,72 @@
+decision:
+  id: ai_model_healthcare_rag_001
+  domain: ai_model_selection
+  question: Which AI model should we use for a healthcare RAG system?
+  policy_version: healthcare_ai_policy_v1
+
+criteria:
+  - name: accuracy
+    weight: 0.35
+    direction: maximize
+    description: Overall task accuracy on medical QA benchmarks
+
+  - name: privacy
+    weight: 0.25
+    direction: maximize
+    description: Privacy and data protection capability
+
+  - name: compliance
+    weight: 0.25
+    direction: maximize
+    description: Regulatory compliance readiness (HIPAA, SOC2)
+
+  - name: latency
+    weight: 0.10
+    direction: minimize
+    description: Average response latency in milliseconds
+
+  - name: cost
+    weight: 0.05
+    direction: minimize
+    description: Relative usage cost per 1M tokens
+
+constraints:
+  - field: privacy
+    operator: ">="
+    value: 85
+    action: block
+    message: Healthcare use case requires privacy score >= 85
+
+  - field: compliance
+    operator: ">="
+    value: 90
+    action: block
+    message: Healthcare use case requires compliance score >= 90
+
+alternatives:
+  - id: model_a
+    name: GPT-4.1
+    values:
+      accuracy: 88
+      privacy: 70
+      compliance: 75
+      latency: 220
+      cost: 0.8
+
+  - id: model_b
+    name: Claude Sonnet
+    values:
+      accuracy: 91
+      privacy: 85
+      compliance: 90
+      latency: 400
+      cost: 0.5
+
+  - id: model_c
+    name: Llama 4
+    values:
+      accuracy: 82
+      privacy: 95
+      compliance: 95
+      latency: 150
+      cost: 0.2

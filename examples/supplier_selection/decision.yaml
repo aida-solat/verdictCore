@@ -1,0 +1,176 @@
+decision:
+  id: supplier_enterprise_sw_001
+  domain: supplier_selection
+  question: Which supplier should we choose for the enterprise software contract?
+  policy_version: procurement_policy_v2
+
+criteria:
+  - name: cost
+    weight: 0.20
+    direction: minimize
+    description: Total contract cost in USD
+
+  - name: delivery_time
+    weight: 0.15
+    direction: minimize
+    description: Estimated delivery time in weeks
+
+  - name: security
+    weight: 0.20
+    direction: maximize
+    description: Security assessment score (0-100)
+
+  - name: compliance
+    weight: 0.20
+    direction: maximize
+    description: Regulatory compliance score (0-100)
+
+  - name: support_quality
+    weight: 0.15
+    direction: maximize
+    description: Support quality rating (0-100)
+
+  - name: financial_stability
+    weight: 0.10
+    direction: maximize
+    description: Financial stability score (0-100)
+
+constraints:
+  - field: security
+    operator: ">="
+    value: 80
+    action: block
+    message: Enterprise contracts require security score >= 80
+
+  - field: compliance
+    operator: ">="
+    value: 85
+    action: block
+    message: Regulatory compliance must be >= 85
+
+  - field: cost
+    operator: "<="
+    value: 500000
+    action: warn
+    message: Budget preference is under $500,000
+
+alternatives:
+  - id: supplier_alpha
+    name: Alpha Technologies
+    values:
+      cost: 450000
+      delivery_time: 12
+      security: 92
+      compliance: 90
+      support_quality: 85
+      financial_stability: 88
+
+  - id: supplier_beta
+    name: Beta Solutions
+    values:
+      cost: 380000
+      delivery_time: 16
+      security: 88
+      compliance: 87
+      support_quality: 90
+      financial_stability: 92
+
+  - id: supplier_gamma
+    name: Gamma Corp
+    values:
+      cost: 520000
+      delivery_time: 8
+      security: 75
+      compliance: 82
+      support_quality: 78
+      financial_stability: 95
+
+  - id: supplier_delta
+    name: Delta Systems
+    values:
+      cost: 410000
+      delivery_time: 10
+      security: 85
+      compliance: 93
+      support_quality: 82
+      financial_stability: 80
+
+evidence:
+  - id: ev_alpha_security
+    alternative_id: supplier_alpha
+    field: security
+    source: penetration_test_2026.pdf
+    source_type: third_party_report
+    claim: Alpha scored 92 in external pen-test audit.
+    value: 92
+    confidence: 0.93
+    reliability: 0.90
+    freshness_days: 45
+    extraction_method: manual
+
+  - id: ev_alpha_compliance
+    alternative_id: supplier_alpha
+    field: compliance
+    source: iso27001_certificate.pdf
+    source_type: official_document
+    claim: Alpha holds ISO 27001 certification, compliance score 90.
+    value: 90
+    confidence: 0.95
+    reliability: 0.95
+    freshness_days: 60
+    extraction_method: manual
+
+  - id: ev_beta_delivery
+    alternative_id: supplier_beta
+    field: delivery_time
+    source: vendor_proposal_email
+    source_type: vendor_statement
+    claim: Beta estimates 16-week delivery timeline.
+    value: 16
+    confidence: 0.60
+    reliability: 0.55
+    freshness_days: null
+    extraction_method: manual
+
+  - id: ev_delta_compliance
+    alternative_id: supplier_delta
+    field: compliance
+    source: soc2_report_2025.pdf
+    source_type: official_document
+    claim: Delta has SOC 2 Type II, compliance score 93.
+    value: 93
+    confidence: 0.92
+    reliability: 0.94
+    freshness_days: 120
+    extraction_method: structured_import
+
+scenarios:
+  - id: cost_sensitive
+    name: Cost-Sensitive Policy
+    criteria_overrides:
+      cost: 0.40
+      delivery_time: 0.10
+      security: 0.20
+      compliance: 0.15
+      support_quality: 0.10
+      financial_stability: 0.05
+
+  - id: compliance_sensitive
+    name: Compliance-Sensitive Policy
+    criteria_overrides:
+      cost: 0.10
+      delivery_time: 0.10
+      security: 0.25
+      compliance: 0.35
+      support_quality: 0.10
+      financial_stability: 0.10
+
+  - id: speed_sensitive
+    name: Speed-Sensitive Policy
+    criteria_overrides:
+      cost: 0.15
+      delivery_time: 0.35
+      security: 0.15
+      compliance: 0.15
+      support_quality: 0.10
+      financial_stability: 0.10

@@ -1,0 +1,81 @@
+decision:
+  id: cloud_vendor_platform_001
+  domain: cloud_vendor_selection
+  question: Which cloud provider should we choose for our new platform?
+  policy_version: infrastructure_policy_v1
+
+criteria:
+  - name: cost
+    weight: 0.25
+    direction: minimize
+    description: Estimated monthly cost score (lower is better)
+
+  - name: reliability
+    weight: 0.30
+    direction: maximize
+    description: Historical uptime and SLA guarantees (0-100)
+
+  - name: security
+    weight: 0.20
+    direction: maximize
+    description: Security certifications and features (0-100)
+
+  - name: developer_experience
+    weight: 0.15
+    direction: maximize
+    description: Developer tooling, documentation, DX score (0-100)
+
+  - name: vendor_lockin_risk
+    weight: 0.10
+    direction: minimize
+    description: Risk of vendor lock-in (0-100, lower is better)
+
+constraints:
+  - field: security
+    operator: ">="
+    value: 80
+    action: block
+    message: Security score must be >= 80 for production workloads
+
+  - field: reliability
+    operator: ">="
+    value: 90
+    action: block
+    message: Minimum reliability of 90 required for SLA commitments
+
+alternatives:
+  - id: aws
+    name: AWS
+    values:
+      cost: 72
+      reliability: 95
+      security: 92
+      developer_experience: 82
+      vendor_lockin_risk: 70
+
+  - id: gcp
+    name: Google Cloud
+    values:
+      cost: 68
+      reliability: 93
+      security: 88
+      developer_experience: 90
+      vendor_lockin_risk: 55
+
+  - id: azure
+    name: Microsoft Azure
+    values:
+      cost: 75
+      reliability: 91
+      security: 90
+      developer_experience: 78
+      vendor_lockin_risk: 65
+
+  - id: hetzner
+    name: Hetzner Cloud
+    values:
+      cost: 30
+      reliability: 88
+      security: 72
+      developer_experience: 70
+      vendor_lockin_risk: 20

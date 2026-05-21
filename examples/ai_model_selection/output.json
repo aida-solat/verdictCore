@@ -1,0 +1,302 @@
+{
+  "decision_id": "ai_model_healthcare_rag_001",
+  "domain": "ai_model_selection",
+  "question": "Which AI model should we use for a healthcare RAG system?",
+  "status": "decided",
+  "recommendation": {
+    "selected_alternative_id": "model_b",
+    "selected_alternative_name": "Claude Sonnet",
+    "decision_class": "approve",
+    "confidence": 0.69
+  },
+  "rankings": [
+    {
+      "alternative_id": "model_b",
+      "name": "Claude Sonnet",
+      "rank": 1,
+      "total_score": 71.25,
+      "blocked": false,
+      "warnings": [],
+      "calculation_trace": {
+        "alternative_id": "model_b",
+        "alternative_name": "Claude Sonnet",
+        "criteria": {
+          "accuracy": {
+            "raw": 91,
+            "normalized": 1.0,
+            "weight": 0.35,
+            "weighted": 0.35
+          },
+          "privacy": {
+            "raw": 85,
+            "normalized": 0.6,
+            "weight": 0.25,
+            "weighted": 0.15
+          },
+          "compliance": {
+            "raw": 90,
+            "normalized": 0.75,
+            "weight": 0.25,
+            "weighted": 0.1875
+          },
+          "latency": {
+            "raw": 400,
+            "normalized": 0.0,
+            "weight": 0.1,
+            "weighted": 0.0
+          },
+          "cost": {
+            "raw": 0.5,
+            "normalized": 0.5,
+            "weight": 0.05,
+            "weighted": 0.025
+          }
+        },
+        "total_score": 71.25
+      }
+    },
+    {
+      "alternative_id": "model_c",
+      "name": "Llama 4",
+      "rank": 2,
+      "total_score": 65.0,
+      "blocked": false,
+      "warnings": [],
+      "calculation_trace": {
+        "alternative_id": "model_c",
+        "alternative_name": "Llama 4",
+        "criteria": {
+          "accuracy": {
+            "raw": 82,
+            "normalized": 0.0,
+            "weight": 0.35,
+            "weighted": 0.0
+          },
+          "privacy": {
+            "raw": 95,
+            "normalized": 1.0,
+            "weight": 0.25,
+            "weighted": 0.25
+          },
+          "compliance": {
+            "raw": 95,
+            "normalized": 1.0,
+            "weight": 0.25,
+            "weighted": 0.25
+          },
+          "latency": {
+            "raw": 150,
+            "normalized": 1.0,
+            "weight": 0.1,
+            "weighted": 0.1
+          },
+          "cost": {
+            "raw": 0.2,
+            "normalized": 1.0,
+            "weight": 0.05,
+            "weighted": 0.05
+          }
+        },
+        "total_score": 65.0
+      }
+    },
+    {
+      "alternative_id": "model_a",
+      "name": "GPT-4.1",
+      "rank": null,
+      "total_score": 30.53,
+      "blocked": true,
+      "warnings": [],
+      "calculation_trace": {
+        "alternative_id": "model_a",
+        "alternative_name": "GPT-4.1",
+        "criteria": {
+          "accuracy": {
+            "raw": 88,
+            "normalized": 0.6666666666666666,
+            "weight": 0.35,
+            "weighted": 0.2333333333333333
+          },
+          "privacy": {
+            "raw": 70,
+            "normalized": 0.0,
+            "weight": 0.25,
+            "weighted": 0.0
+          },
+          "compliance": {
+            "raw": 75,
+            "normalized": 0.0,
+            "weight": 0.25,
+            "weighted": 0.0
+          },
+          "latency": {
+            "raw": 220,
+            "normalized": 0.72,
+            "weight": 0.1,
+            "weighted": 0.072
+          },
+          "cost": {
+            "raw": 0.8,
+            "normalized": 0.0,
+            "weight": 0.05,
+            "weighted": 0.0
+          }
+        },
+        "total_score": 30.53
+      }
+    }
+  ],
+  "constraint_results": [
+    {
+      "alternative_id": "model_a",
+      "alternative_name": "GPT-4.1",
+      "field": "privacy",
+      "operator": ">=",
+      "required_value": 85,
+      "actual_value": 70,
+      "action": "block",
+      "passed": false,
+      "message": "Healthcare use case requires privacy score >= 85"
+    },
+    {
+      "alternative_id": "model_a",
+      "alternative_name": "GPT-4.1",
+      "field": "compliance",
+      "operator": ">=",
+      "required_value": 90,
+      "actual_value": 75,
+      "action": "block",
+      "passed": false,
+      "message": "Healthcare use case requires compliance score >= 90"
+    },
+    {
+      "alternative_id": "model_b",
+      "alternative_name": "Claude Sonnet",
+      "field": "privacy",
+      "operator": ">=",
+      "required_value": 85,
+      "actual_value": 85,
+      "action": "block",
+      "passed": true,
+      "message": null
+    },
+    {
+      "alternative_id": "model_b",
+      "alternative_name": "Claude Sonnet",
+      "field": "compliance",
+      "operator": ">=",
+      "required_value": 90,
+      "actual_value": 90,
+      "action": "block",
+      "passed": true,
+      "message": null
+    },
+    {
+      "alternative_id": "model_c",
+      "alternative_name": "Llama 4",
+      "field": "privacy",
+      "operator": ">=",
+      "required_value": 85,
+      "actual_value": 95,
+      "action": "block",
+      "passed": true,
+      "message": null
+    },
+    {
+      "alternative_id": "model_c",
+      "alternative_name": "Llama 4",
+      "field": "compliance",
+      "operator": ">=",
+      "required_value": 90,
+      "actual_value": 95,
+      "action": "block",
+      "passed": true,
+      "message": null
+    }
+  ],
+  "explanation": {
+    "why_selected": "Claude Sonnet was selected because it passed all mandatory constraints and achieved the highest weighted score (71.2). 1 alternative(s) were blocked due to constraint violations: GPT-4.1. The next best option was Llama 4 with a score of 65.0 (gap: 6.2 points).",
+    "top_drivers": [
+      {
+        "criterion": "accuracy",
+        "impact": 0.49
+      },
+      {
+        "criterion": "compliance",
+        "impact": 0.26
+      },
+      {
+        "criterion": "privacy",
+        "impact": 0.21
+      },
+      {
+        "criterion": "cost",
+        "impact": 0.04
+      },
+      {
+        "criterion": "latency",
+        "impact": 0.0
+      }
+    ],
+    "why_not": [
+      {
+        "alternative_id": "model_c",
+        "alternative_name": "Llama 4",
+        "reason": "Llama 4 passed all constraints but scored 6.2 points below Claude Sonnet (65.0 vs 71.2)."
+      },
+      {
+        "alternative_id": "model_a",
+        "alternative_name": "GPT-4.1",
+        "reason": "GPT-4.1 was blocked because it failed mandatory constraint(s): privacy >= 85 (actual: 70); compliance >= 90 (actual: 75)."
+      }
+    ],
+    "sensitivity": {
+      "decision_stability_score": 0.08,
+      "level": "unstable",
+      "sensitive_to": [
+        "accuracy",
+        "privacy",
+        "compliance",
+        "latency",
+        "cost"
+      ],
+      "winner_changes_if": [
+        {
+          "criterion": "accuracy",
+          "threshold": 0.04,
+          "new_winner": "Llama 4"
+        },
+        {
+          "criterion": "privacy",
+          "threshold": 0.04,
+          "new_winner": "Llama 4"
+        },
+        {
+          "criterion": "compliance",
+          "threshold": 0.04,
+          "new_winner": "Llama 4"
+        },
+        {
+          "criterion": "latency",
+          "threshold": 0.04,
+          "new_winner": "Llama 4"
+        },
+        {
+          "criterion": "cost",
+          "threshold": 0.04,
+          "new_winner": "Llama 4"
+        }
+      ]
+    }
+  },
+  "audit": {
+    "engine_version": "0.1.0",
+    "policy_version": "healthcare_ai_policy_v1",
+    "input_hash": "sha256:30ea7ad7dfca92948b9f09492f91df7bad5359c2795c84e829e44a122f797c43",
+    "ruleset_hash": "sha256:0b2f6cc98ba84ebbb254b536b7497e1d129b028074c275716c2c4634add9f17d",
+    "output_hash": "sha256:5baec63be0ad95cc468db682067b7ad501815a8a204ce7c16e40a7142cf35d86",
+    "created_at": "2026-05-21T11:20:20.746465Z"
+  },
+  "warnings": [],
+  "metadata": {}
+}
