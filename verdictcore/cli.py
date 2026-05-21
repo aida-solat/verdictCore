@@ -14,6 +14,7 @@ from verdictcore.engine import Deciwa
 from verdictcore.io.json_exporter import export_json
 from verdictcore.io.markdown_exporter import export_markdown
 from verdictcore.io.yaml_loader import load_decision_yaml
+from verdictcore.models.result import DecisionResult
 from verdictcore.version import __version__
 
 app = typer.Typer(
@@ -337,12 +338,12 @@ def policy_diff(
 
     if diff.constraint_changes:
         console.print("[bold]Constraint changes:[/bold]")
-        for c in diff.constraint_changes:
-            console.print(f"  • [{c.change_type}] {c.field}")
-            if c.from_value:
-                console.print(f"    from: {c.from_value}")
-            if c.to_value:
-                console.print(f"    to:   {c.to_value}")
+        for cc in diff.constraint_changes:
+            console.print(f"  • [{cc.change_type}] {cc.field}")
+            if cc.from_value:
+                console.print(f"    from: {cc.from_value}")
+            if cc.to_value:
+                console.print(f"    to:   {cc.to_value}")
         console.print()
 
     if diff.interpretation:
@@ -753,7 +754,7 @@ def optimize_cmd(
     objectives = [Objective(**o) for o in objectives_data]
     analyzer = ParetoAnalyzer()
     report = analyzer.analyze(
-        decision_input.decision_id,
+        decision_input.decision_id or "unnamed",
         decision_input.alternatives,
         objectives,
     )
@@ -1060,7 +1061,7 @@ def version() -> None:
     console.print(f"VerdictCore v{__version__}")
 
 
-def _print_result(result) -> None:
+def _print_result(result: DecisionResult) -> None:
 
     status_color = {
         "decided": "green",
@@ -1124,7 +1125,7 @@ def _print_result(result) -> None:
     _print_explanation(result)
 
 
-def _print_explanation(result) -> None:
+def _print_explanation(result: DecisionResult) -> None:
     console.print("[bold]Why Selected:[/bold]")
     console.print(f"  {result.explanation.why_selected}")
     console.print()

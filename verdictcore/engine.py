@@ -22,6 +22,7 @@ from verdictcore.models.result import (
     DecisionResult,
     DecisionStatus,
     Explanation,
+    RankedAlternative,
     Recommendation,
 )
 from verdictcore.scoring.ranking import rank_alternatives
@@ -151,7 +152,7 @@ class Deciwa:
 
     def _determine_outcome(
         self,
-        rankings: list,
+        rankings: list[RankedAlternative],
         all_blocked: bool,
         has_missing_data: bool,
         missing_policy: MissingPolicy,

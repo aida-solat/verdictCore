@@ -96,7 +96,7 @@ class PatternDiscovery:
         results: list[DecisionResult], domain: str,
     ) -> list[DecisionPattern]:
         patterns: list[DecisionPattern] = []
-        field_failures: Counter = Counter()
+        field_failures: Counter[str] = Counter()
 
         for r in results:
             for cr in r.constraint_results:

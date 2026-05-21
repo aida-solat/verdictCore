@@ -131,7 +131,7 @@ class ParetoAnalyzer:
             if val is None:
                 continue
             vals = [
-                float(a.values.get(obj.field, 0))
+                float(a.values[obj.field])  # type: ignore[arg-type]
                 for a in all_alts if a.values.get(obj.field) is not None
             ]
             if not vals:

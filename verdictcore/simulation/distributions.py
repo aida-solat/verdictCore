@@ -42,7 +42,7 @@ def sample_variable(var: SimulationVariable, rng: random.Random) -> float | str:
         if isinstance(values, dict):
             items = list(values.keys())
             weights = [float(v) for v in values.values()]
-            return rng.choices(items, weights=weights, k=1)[0]
+            return str(rng.choices(items, weights=weights, k=1)[0])
         return str(rng.choice(values))
 
     raise ValueError(f"Unsupported distribution: {dist}")

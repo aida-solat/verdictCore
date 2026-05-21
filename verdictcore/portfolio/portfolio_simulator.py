@@ -44,6 +44,8 @@ class PortfolioSimulator:
         total = 0
 
         for decision in decisions:
+            if decision.decision_id is None:
+                continue
             original = result_map.get(decision.decision_id)
             if original is None:
                 continue
@@ -57,7 +59,7 @@ class PortfolioSimulator:
 
             if old_winner != new_winner:
                 changed_count += 1
-                changed_ids.append(decision.decision_id)
+                changed_ids.append(decision.decision_id)  # already checked not None above
 
             if original.status.value == "blocked":
                 old_blocked += 1

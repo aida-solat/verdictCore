@@ -14,7 +14,7 @@ class ExtractedEvidence(BaseModel):
     confidence: float
 
 
-def extract_evidence_schema() -> dict:
+def extract_evidence_schema() -> dict[str, object]:
     return {
         "type": "object",
         "properties": {

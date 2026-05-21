@@ -83,9 +83,9 @@ class ConstraintEvaluator:
             elif operator == "<=":
                 return float(actual) <= float(required)
             elif operator == "==":
-                return actual == required
+                return bool(actual == required)
             elif operator == "!=":
-                return actual != required
+                return bool(actual != required)
             elif operator == "in":
                 return actual in required
             elif operator == "not_in":

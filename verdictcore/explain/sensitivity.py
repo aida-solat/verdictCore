@@ -81,7 +81,7 @@ def run_sensitivity_analysis(
 
     return SensitivityResult(
         decision_stability_score=stability_score,
-        level=level,  # type: ignore[arg-type]
+        level=level,
         sensitive_to=sensitive_to,
         winner_changes_if=winner_changes_if,
     )
