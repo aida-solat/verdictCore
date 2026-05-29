@@ -1,4 +1,4 @@
-# VerdictCore
+# VerdictCore — Deterministic AI Decision Engine
 
 **Deterministic decisions. Explainable tradeoffs. Audit-ready outputs.**
 
